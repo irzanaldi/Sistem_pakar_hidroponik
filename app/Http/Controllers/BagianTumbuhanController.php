@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bagian;
+use App\Models\Gejala;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
@@ -14,6 +15,7 @@ class BagianTumbuhanController extends Controller
     public function index()
     {
         //
+        $gejala = Gejala::get();
         $bagian = Bagian::paginate(5);
         return view('admin.bagianTumbuhan', compact('bagian'));
     }
