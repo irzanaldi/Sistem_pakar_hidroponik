@@ -14,8 +14,8 @@ class CreateTanamenTable extends Migration
     public function up()
     {
         Schema::create('tanamen', function (Blueprint $table) {
-            $table->id('id_tanaman');
-            $table->string('nama_tanaman');
+            $table->id();
+            $table->string('nama');
             $table->timestamps();
         });
     }

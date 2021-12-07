@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateKesimpulansTable extends Migration
+class CreateBagianTanamenTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateKesimpulansTable extends Migration
      */
     public function up()
     {
-        Schema::create('kesimpulans', function (Blueprint $table) {
-            $table->id('id_kesimpulan');
-            $table->string('id_unsur');
-            $table->string('solusi');
+        Schema::create('bagian_tanamen', function (Blueprint $table) {
+            $table->id();
+            $table->string('nama');
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ class CreateKesimpulansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kesimpulans');
+        Schema::dropIfExists('bagian_tanamen');
     }
 }

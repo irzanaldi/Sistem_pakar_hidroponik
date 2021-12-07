@@ -5,7 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Bagian extends Model
+class BagianTanaman extends Model
 {
     use HasFactory;
+
+    public $fillable = ['nama'];
 }

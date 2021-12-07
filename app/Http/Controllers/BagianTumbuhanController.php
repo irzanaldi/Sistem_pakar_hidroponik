@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bagian;
+use App\Models\BagianTanaman;
 use App\Models\Gejala;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -14,9 +15,7 @@ class BagianTumbuhanController extends Controller
 {
     public function index()
     {
-        //
-        $gejala = Gejala::get();
-        $bagian = Bagian::paginate(5);
+        $bagian = BagianTanaman::paginate(5);
         return view('admin.bagianTumbuhan', compact('bagian'));
     }
 
@@ -39,12 +38,11 @@ class BagianTumbuhanController extends Controller
      */
     public function store(Request $request)
     {
-        // 
         $rules = [
-            'nama_tanaman' => 'required'
+            'nama' => 'required'
         ];
         $pesan = [
-            'nama_tanaman.required' => 'nama tanaman tidak boleh kosong'
+            'nama.required' => 'nama tanaman tidak boleh kosong'
         ];
 
         $validator = Validator::make($request->all(), $rules, $pesan);
@@ -52,15 +50,15 @@ class BagianTumbuhanController extends Controller
             return redirect()->back()->witherror($validator);
         }
 
-        $tanaman = new Bagian;
-        $tanaman->nama_tanaman = $request->nama_tanaman;
-        $save = $tanaman->save();
+        $bagian = new BagianTanaman();
+        $bagian->nama = $request->nama;
+        $save = $bagian->save();
         if ($save) {
             Session::flash('succes', 'data berhasil disimpan');
-            return redirect()->route('tanaman.index');
+            return redirect()->route('bagian.index');
         } else {
-            Session::flash('error', ['' => 'register gagal']);
-            return redirect()->route('tanaman.index');
+            Session::flash('error', ['' => 'Create data gagal']);
+            return redirect()->route('bagian.index');
         }
     }
 
@@ -73,7 +71,7 @@ class BagianTumbuhanController extends Controller
     public function show($id)
     {
         //
-        $tanaman = Bagian::find($id);
+        $tanaman = BagianTanaman::find($id);
         return view('detailTanaman')->with('tanaman', $tanaman);
     }
 
@@ -86,7 +84,7 @@ class BagianTumbuhanController extends Controller
     public function edit($id)
     {
         //
-        $tanaman = Bagian::find($id);
+        $tanaman = BagianTanaman::find($id);
         return view('editTanaman')->with('tanaman', $tanaman);
     }
 
@@ -99,14 +97,16 @@ class BagianTumbuhanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
         $request->validate([
-            'nama_tanaman' => 'required'
+            'nama' => 'required'
         ]);
 
-        Bagian::find($id)->update($request->all());
-        return redirect()->route('tanaman')
-            ->with('success', 'Tanaman Berhasil Diubah');
+        $bagian = BagianTanaman::find($id);
+        $bagian->nama = $request->nama;
+        $bagian->save();
+        // dd($tanaman->nama);
+        return redirect()->route('bagian.index')
+            ->with('success', 'Bagian Tanaman Berhasil Diubah');
     }
 
     /**

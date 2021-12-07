@@ -41,12 +41,12 @@ class TanamanController extends Controller
      */
     public function store(Request $request)
     {
-        // 
+        //
         $rules = [
-            'nama_tanaman' => 'required'
+            'nama' => 'required'
         ];
         $pesan = [
-            'nama_tanaman.required' => 'nama tanaman tidak boleh kosong'
+            'nama.required' => 'nama tanaman tidak boleh kosong'
         ];
 
         $validator = Validator::make($request->all(), $rules, $pesan);
@@ -55,13 +55,14 @@ class TanamanController extends Controller
         }
 
         $tanaman = new Tanaman;
-        $tanaman->nama_tanaman = $request->nama_tanaman;
+        $tanaman->nama = $request->nama;
         $save = $tanaman->save();
+
         if ($save) {
             Session::flash('succes', 'data berhasil disimpan');
             return redirect()->route('tanaman.index');
         } else {
-            Session::flash('error', ['' => 'register gagal']);
+            Session::flash('error', 'data tidak disimpan');
             return redirect()->route('tanaman.index');
         }
     }
@@ -75,8 +76,8 @@ class TanamanController extends Controller
     public function show($id)
     {
         //
-        $tanaman = Tanaman::find($id);
-        return view('detailTanaman')->with('tanaman', $tanaman);
+        // $tanaman = Tanaman::find($id);
+        // return view('detailTanaman')->with('tanaman', $tanaman);
     }
 
     /**
@@ -87,9 +88,9 @@ class TanamanController extends Controller
      */
     public function edit($id)
     {
-        //
-        $tanaman = Tanaman::find($id);
-        return view('editTanaman')->with('tanaman', $tanaman);
+        dd('a');
+        // $tanaman = Tanaman::find($id);
+        // return view('editTanaman')->with('tanaman', $tanaman);
     }
 
     /**
@@ -101,13 +102,15 @@ class TanamanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
         $request->validate([
-            'nama_tanaman' => 'required'
+            'nama' => 'required'
         ]);
 
-        Tanaman::find($id)->update($request->all());
-        return redirect()->route('tanaman')
+        $tanaman = Tanaman::find($id);
+        $tanaman->nama = $request->nama;
+        $tanaman->save();
+        // dd($tanaman->nama);
+        return redirect()->route('tanaman.index')
             ->with('success', 'Tanaman Berhasil Diubah');
     }
 
@@ -117,10 +120,10 @@ class TanamanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete($id_tanaman)
+    public function delete($id)
     {
         //
-        DB::table('tanamen')->where('id_tanaman', '=', $id_tanaman)->delete();
+        DB::table('tanamen')->where('id', '=', $id)->delete();
 
         return redirect()->route('tanaman.index')
             ->with('success', 'Tanaman Berhasil Dihapus');

@@ -14,11 +14,11 @@ class CreateGejalasTable extends Migration
     public function up()
     {
         Schema::create('gejalas', function (Blueprint $table) {
-            $table->id('id_gejala');
-            $table->string('id_bagian');
-            $table->string('id_unsur');
-            $table->string('id_tanaman');
-            $table->string('nama_gejala');
+            $table->id();
+            $table->foreignId('bagian_tanamen_id')->references('id')->on("bagian_tanamen")->onDelete('cascade');
+            $table->foreignId('unsur_id')->references('id')->on("unsur_haras")->onDelete('cascade');
+            $table->foreignId('tanamen_id')->references('id')->on("tanamen")->onDelete('cascade');;
+            $table->string('name');
             $table->timestamps();
         });
     }

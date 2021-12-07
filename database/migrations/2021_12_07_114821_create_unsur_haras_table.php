@@ -14,9 +14,8 @@ class CreateUnsurHarasTable extends Migration
     public function up()
     {
         Schema::create('unsur_haras', function (Blueprint $table) {
-            $table->id('id_unsur');
-            $table->string('nama_unsur');
-            $table->string('id_tanaman');
+            $table->id();
+            $table->string('nama');
             $table->timestamps();
         });
     }

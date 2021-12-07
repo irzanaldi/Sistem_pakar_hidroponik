@@ -27,6 +27,7 @@ Route::get('/dassboard', [UserController::class, 'dassboard'])->name('dassboard'
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 Route::resource('gejala', GejalaController::class);
 Route::resource('tanaman', TanamanController::class);
+Route::put('tanaman-update/{id}', [TanamanController::class, 'update'])->name('update');
 Route::resource('unsur', UnsurController::class);
 Route::resource('bagian', BagianTumbuhanController::class);
-Route::delete('tanaman-destroy/{id_tanaman}', [TanamanController::class, 'delete'])->name('tanaman.destroy');
+Route::delete('tanaman-destroy/{id}', [TanamanController::class, 'delete'])->name('tanaman.destroy');

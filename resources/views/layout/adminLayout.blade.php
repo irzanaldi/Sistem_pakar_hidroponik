@@ -221,9 +221,9 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                    
+
                         @yield('content')
-                    
+
 
                 </div>
                 <!-- /.container-fluid -->
@@ -271,16 +271,21 @@
             </div>
         </div>
     </div>
-        
+
         </body>
+
         <script>
         var myModal = document.getElementById('myModal')
 var myInput = document.getElementById('myInput')
 
 myModal.addEventListener('shown.bs.modal', function () {
   myInput.focus()
-  
+
 })
+
+function myFunction() {
+        document.getElementById("myForm").reset();
+        }
 </script>
         {{-- <script src="vendor/jquery/jquery.min.js"></script> --}}
         <script src="{{ asset('jquery/jquery.min.js') }}"></script>

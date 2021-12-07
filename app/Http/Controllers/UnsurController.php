@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Tanaman;
 use App\Models\UnsurHara;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 
 class UnsurController extends Controller
@@ -18,10 +19,8 @@ class UnsurController extends Controller
     public function index()
     {
         //
-        $unsur = UnsurHara::all();
-        $tanaman = Tanaman::all();
-
-        return view('admin.unsur', ['unsur' => $unsur, 'tanaman' => $tanaman]);
+        $unsur = UnsurHara::paginate(5);
+        return view('admin.unsur', compact('unsur'));
     }
 
     /**
@@ -46,27 +45,26 @@ class UnsurController extends Controller
     {
         //
         $rules = [
-            'nama_unsur' => 'required'
+            'nama' => 'required'
         ];
         $pesan = [
-            'nama_unsur.required' => 'nama unsur tidak boleh kosong'
+            'nama.required' => 'nama unsur tidak boleh kosong'
         ];
 
-        $validator = \Illuminate\Support\Facades\Validator::make($request->all(), $rules, $pesan);
+        $validator = Validator::make($request->all(), $rules, $pesan);
         if ($validator->fails()) {
             return redirect()->back()->witherror($validator);
         }
 
         $unsur = new UnsurHara;
-        $unsur->nama_unsur = $request->nama_unsur;
-        $unsur->id_tanaman = $request->id_tanaman;
+        $unsur->nama = $request->nama;
         $save = $unsur->save();
         if ($save) {
             Session::flash('succes', 'data berhasil disimpan');
-            return redirect()->route('login');
+            return redirect()->route('unsur.index');
         } else {
             Session::flash('error', ['' => 'register gagal']);
-            return redirect()->route('register');
+            return redirect()->route('unsur.index');
         }
     }
 
@@ -105,13 +103,16 @@ class UnsurController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
         $request->validate([
-            'nama_unsur' => 'required'
+            'nama' => 'required'
         ]);
-        UnsurHara::find($id)->update($request->all());
-        return redirect()->route('unsur')
-            ->with('success', 'Unsur Hara Berhasil Diubah');
+
+        $unsur = UnsurHara::find($id);
+        $unsur->nama = $request->nama;
+        $unsur->save();
+        // dd($tanaman->nama);
+        return redirect()->route('unsur.index')
+            ->with('success', 'Tanaman Berhasil Diubah');
     }
 
     /**
@@ -124,7 +125,7 @@ class UnsurController extends Controller
     {
         //
         UnsurHara::find($id)->delete();
-        return redirect()->route('unsur')
+        return redirect()->route('unsur.index')
             ->with('success', 'Unsur Hara Berhasil Dihapus');
     }
 }
