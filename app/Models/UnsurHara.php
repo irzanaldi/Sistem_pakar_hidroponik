@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class UnsurHara extends Model
 {
     use HasFactory;
+
+    public $fillable = ['nama'];
 }

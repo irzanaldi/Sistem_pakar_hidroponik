@@ -6,6 +6,7 @@ use App\Models\Gejala;
 use App\Models\Tanaman;
 use App\Models\UnsurHara;
 use App\Models\Bagian;
+use App\Models\BagianTanaman;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Session;
@@ -22,9 +23,16 @@ class GejalaController extends Controller
      */
     public function index()
     {
-        //
-        $gejala = Gejala::paginate(10);
-        return view('admin.gejala')->with('gejala', $gejala);
+        $gejala = Gejala::paginate();
+        $tanaman = Tanaman::get();
+        $unsur = UnsurHara::get();
+        $bagian = BagianTanaman::get();
+        return view('admin.gejala')->with([
+            'gejala' => $gejala,
+            'tanamen' => $tanaman,
+            'unsurs' => $unsur,
+            'bagians' => $bagian,
+        ]);
     }
 
     /**
@@ -35,10 +43,6 @@ class GejalaController extends Controller
     public function create()
     {
         //
-        $unsur = UnsurHara::all();
-        $tanaman = Tanaman::all();
-        $bagian = Bagian::all();
-        return view('FormGejala', ['unsur' => $unsur, 'tanaman' => $tanaman, 'bagian' => $bagian]);
     }
 
     /**
@@ -49,12 +53,15 @@ class GejalaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request);
         $rules = [
-            'nama_gejala' => 'required'
+            'nama' => 'required',
+            'unsur' => 'required',
+            'tumbuhan' => 'required',
+            'bagian' => 'required',
         ];
         $pesan = [
-            'gejala.required' => 'nama gejala tidak boleh kosong'
+            'nama.required' => 'nama gejala tidak boleh kosong'
         ];
 
         $validator = Validator::make($request->all(), $rules, $pesan);
@@ -62,18 +69,19 @@ class GejalaController extends Controller
             return redirect()->back()->witherror($validator);
         }
 
-        $gejala = new Gejala;
-        $gejala->id_bagian = $request->id_bagian;
-        $gejala->id_unsur = $request->id_unsur;
-        $gejala->id_tanaman = $request->id_tanaman;
-        $gejala->nama_gejala = $request->nama_gejala;
-        $save = $gejala->save();
-        if ($save) {
+        $gejala = Gejala::create([
+            'bagian_tanamen_id' => $request->bagian,
+            'unsur_id' => $request->unsur,
+            'tanamen_id' => $request->tumbuhan,
+            'name' => $request->nama,
+        ]);
+
+        if ($gejala) {
             Session::flash('succes', 'data berhasil disimpan');
-            return redirect()->route('login');
+            return redirect()->route('gejala.index');
         } else {
-            Session::flash('error', ['' => 'register gagal']);
-            return redirect()->route('register');
+            Session::flash('error', ['' => 'data gagal disimpan']);
+            return redirect()->route('gejala.index');
         }
     }
 

@@ -1,9 +1,8 @@
-
 @extends('layout.adminLayout')
 @section('content')
-<!-- Page Heading -->
+  <!-- Page Heading -->
 <h1 class="h3 mb-2 text-gray-800">Tabel Gejala</h1>
-{{-- @dump($gejala->unsur()) --}}
+
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
@@ -29,15 +28,14 @@
             </thead>
             <tbody>
 
-                @if(!empty($gejala) && $gejala->count())
+                @if(!empty($gejela) && $gejala->count())
                     @foreach($gejala as $key => $value)
                         <tr>
                             <td>{{ $key + $gejala->firstItem() }}</td>
-                            <td>{{ $value->bagianTanamen->nama }}</td>
-                            <td>{{ $value->tanamen->nama }}</td>
-                            <td>{{ $value->unsur->nama }}</td>
-                            <td>{{ $value->name }}</td>
-                            {{-- <td>{{ $value->unsur->nama }}</td> --}}
+                            <td>{{ $value->nama_gejala }}</td>
+                            <td>{{ $value->nama_gejala }}</td>
+                            <td>{{ $value->nama_gejala }}</td>
+                            <td>{{ $value->nama_gejala }}</td>
                             <td>
                                 <a href="" class="btn btn-danger" data-toggle="modal" name="_method" value="DELETE"
                                 data-target="#hapustanaman{{  $value->id_gejala }}">Delete</a>
@@ -53,7 +51,7 @@
                 <h4 class="text-center">Apakah anda yakin menghapus tanaman ini? : <span>{{ $value->nama_gejala }}</span></h4>
             </div>
         <div class="modal-footer">
-            <form action="{{ route('gejala.destroy', [$value->id] ) }}" method="post">
+            <form action="{{ route('gejala.destroy', [$value->id_gejala] ) }}" method="post">
             @csrf
             @method('delete')
                 <button type="submit" class="btn btn-primary">Hapus tanaman!</button>
@@ -62,8 +60,8 @@
         </div>
         </div>
     </div>
-</div>
 
+</div>
 
                     @endforeach
                 @else
@@ -84,39 +82,18 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Tambah Gejala</h5>
+                <h5 class="modal-title">Tambah Barang</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
             </div>
     <div class="modal-body">
                 <!--FORM TAMBAH BARANG-->
-        <form action="{{ route('gejala.store') }}" method="post">
+        <form action="{{ route('tanaman.store') }}" method="post">
         @csrf
         <div class="form-group">
-            <label for="">Nama Gejala</label>
-                <input type="text" class="form-control" id="nama" name="nama" aria-describedby="emailHelp">
-            <label for="">Nama Bagian</label>
-            <select name="bagian" id="bagian" class="form-control" aria-label="Default select example">
-                <option value="">Bagian Tanaman</option>
-                @foreach ($bagians as $gejala)
-                    <option value="{{ $gejala->id }}">{{ $gejala->nama }}</option>
-                @endforeach
-                </select>
-            <label for="tumbuhan">Nama Tumbuhan</label>
-                <select name="tumbuhan" id="tumbuhan" class="form-control">
-                    <option value="">Pilih Tumbuhan</option>
-                    @foreach ($tanamen as $gejala)
-                    <option value="{{ $gejala->id }}">{{ $gejala->nama }}</option>
-                    @endforeach
-                </select>
-            <label for="">Nama Unsur</label>
-                <select name="unsur" id="unsur" class="form-control">
-                    <option value="">Pilih Unsur Hara</option>
-                    @foreach ($unsurs as $gejala)
-                    <option value="{{ $gejala->id }}">{{ $gejala->nama }}</option>
-                    @endforeach
-                </select>
+            <label for="">Nama Barang</label>
+            <input type="text" class="form-control" id="nama_tanaman" name="nama_tanaman" aria-describedby="emailHelp">
         </div>
             <button type="submit" class="btn btn-primary">Simpan Data</button>
         </form>
