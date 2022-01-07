@@ -6,6 +6,8 @@ use App\Http\Controllers\UnsurController;
 use App\Http\Controllers\GejalaController;
 use App\Http\Controllers\TanamanController;
 use App\Http\Controllers\BagianTumbuhanController;
+use App\Http\Controllers\WelcomeController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,9 +19,10 @@ use App\Http\Controllers\BagianTumbuhanController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::get('/', [WelcomeController::class, 'index'])->name('index');
 Route::get('/formlogin', [UserController::class, 'FormLogin'])->name('FormLogin');
 // Route::post('/login', [UserController::class, 'login'])->name('login');
 Route::post('actionlogin', [UserController::class, 'actionlogin'])->name('actionlogin');
