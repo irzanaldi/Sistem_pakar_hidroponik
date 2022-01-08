@@ -1,7 +1,7 @@
 @extends('layout.adminLayout')
 @section('content')
   <!-- Page Heading -->
-<h1 class="h3 mb-2 text-gray-800">Tabel Gejala</h1>
+<h1 class="h3 mb-2 text-gray-800">Tabel Kesimpulan</h1>
 
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
@@ -21,6 +21,7 @@
                     <th>No</th>
                     <th>Nama Kesimpulan</th>
                     <th>Unsur</th>
+                    <th>Solusi</th>
                     <th width="300px;">Action</th>
                 </tr>
             </thead>
@@ -32,6 +33,7 @@
                             <td>{{ $key + $kesimpulan->firstItem() }}</td>
                             <td>{{ $value->name }}</td>
                             <td>{{ $value->unsur->nama }}</td>
+                            <td>{{ $value->solusi }}</td>
                             <td>
                                 <a href="" class="btn btn-danger" data-toggle="modal" name="_method" value="DELETE"
                                 data-target="#hapustanaman{{  $value->id }}">Delete</a>
@@ -85,6 +87,10 @@
                         <option value="{{ $gejala->id }}">{{ $gejala->nama }}</option>
                         @endforeach
                 </select>
+
+                <label for="">Solusi</label>
+                    <input type="text" class="form-control" value="{{ $value->solusi }}" id="solusi" name="solusi" aria-describedby="emailHelp">
+
                 </div>
             <button type="submit" class="btn btn-primary">Simpan Data</button>
         </form>
@@ -123,7 +129,7 @@
         @csrf
         <div class="form-group">
             <label for="">Nama kesimpulan</label>
-                    <input type="text" class="form-control" id="nama" name="nama" aria-describedby="emailHelp">
+            <input type="text" class="form-control" id="nama" name="nama" aria-describedby="emailHelp">
 
                     <label for="">Nama Unsur</label>
                     <select name="unsur" id="unsur" class="form-control">
@@ -132,6 +138,10 @@
                         <option value="{{ $gejala->id }}">{{ $gejala->nama }}</option>
                         @endforeach
                 </select>
+
+            <label for="">Solusi</label>
+            <input type="text" class="form-control" id="solusi" name="solusi" aria-describedby="emailHelp">
+
         </div>
             <button type="submit" class="btn btn-primary">Simpan Data</button>
         </form>

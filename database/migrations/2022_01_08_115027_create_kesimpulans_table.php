@@ -16,6 +16,7 @@ class CreateKesimpulansTable extends Migration
         Schema::create('kesimpulans', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('solus');
             $table->foreignId('unsur_id')->references('id')->on("unsur_haras")->onDelete('cascade');
             $table->timestamps();
         });

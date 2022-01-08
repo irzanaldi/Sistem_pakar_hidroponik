@@ -47,10 +47,12 @@ class KesimpulanController extends Controller
         $rules = [
             'nama' => 'required',
             'unsur' => 'required',
+            'solusi' => 'required',
         ];
         $pesan = [
             'nama.required' => 'nama tidak boleh kosong',
-            'unsur.required' => 'unsur hara tidak boleh kosong'
+            'unsur.required' => 'unsur hara tidak boleh kosong',
+            'solusi.required' => 'solusi tidak boleh kosong',
         ];
 
         $validator = Validator::make($request->all(), $rules, $pesan);
@@ -61,6 +63,7 @@ class KesimpulanController extends Controller
         $kesimpulan = Kesimpulan::create([
             'unsur_id' => $request->unsur,
             'name' => $request->nama,
+            'solusi' => $request->solusi,
         ]);
 
         if ($kesimpulan) {
