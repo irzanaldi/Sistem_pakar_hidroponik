@@ -11,7 +11,7 @@ class Kesimpulan extends Model
 
     public $fillable = ['name', 'unsur_id'];
 
-    public function UnsurHara()
+    public function unsur()
     {
         return $this->belongsTo(UnsurHara::class);
     }

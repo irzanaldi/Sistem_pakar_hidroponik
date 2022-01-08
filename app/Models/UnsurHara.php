@@ -10,4 +10,9 @@ class UnsurHara extends Model
     use HasFactory;
 
     public $fillable = ['nama'];
+
+    public function Gejalas()
+    {
+        return $this->hasMany(Gejala::class);
+    }
 }

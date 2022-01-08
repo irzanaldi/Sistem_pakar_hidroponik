@@ -138,7 +138,7 @@ class GejalaController extends Controller
     {
         //
         Gejala::find($id)->delete();
-        return redirect()->route('unsur')
+        return redirect()->route('gejala')
             ->with('success', 'Gejala Berhasil Dihapus');
     }
 }

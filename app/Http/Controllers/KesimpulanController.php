@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Kesimpulan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\UnsurHara;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
@@ -18,7 +19,11 @@ class KesimpulanController extends Controller
     public function index()
     {
         $kesimpulan = Kesimpulan::paginate(5);
-        return view('admin.kesimpulan', compact('kesimpulan'));
+        $unsur = UnsurHara::get();
+        return view('admin.kesimpulan')->with([
+            'kesimpulan' => $kesimpulan,
+            'unsur' => $unsur,
+        ]);
     }
 
     /**
@@ -60,10 +65,10 @@ class KesimpulanController extends Controller
 
         if ($kesimpulan) {
             Session::flash('succes', 'data berhasil disimpan');
-            return redirect()->route('kesimpu$kesimpulan.index');
+            return redirect()->route('kesimpulan.index');
         } else {
             Session::flash('error', ['' => 'data gagal disimpan']);
-            return redirect()->route('kesimpu$kesimpulan.index');
+            return redirect()->route('kesimpulan.index');
         }
     }
 
@@ -98,7 +103,13 @@ class KesimpulanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'unsur' => 'required'
+        ]);
+        Kesimpulan::find($id)->update($request->all());
+        return redirect()->route('kesimpulan.index')
+            ->with('success', 'Kesimpulan Berhasil Diubah');
     }
 
     /**
@@ -109,6 +120,8 @@ class KesimpulanController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Kesimpulan::find($id)->delete();
+        return redirect()->route('kesimpulan.index')
+            ->with('success', 'Kesimpulan Berhasil Dihapus');
     }
 }
