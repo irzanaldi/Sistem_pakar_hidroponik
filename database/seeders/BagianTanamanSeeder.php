@@ -18,6 +18,7 @@ class BagianTanamanSeeder extends Seeder
         $data[] = ["nama" => "Daun"];
         $data[] = ["nama" => "Batang"];
         $data[] = ["nama" => "Akar"];
+        $data[] = ["nama" => "Proses Tumbuh"];
 
         foreach ($data as $key => $dt) {
             $activity = BagianTanaman::create($dt);

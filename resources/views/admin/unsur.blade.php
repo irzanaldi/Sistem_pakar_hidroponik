@@ -84,14 +84,15 @@
     </div>
 </div>
 
-{!! $unsur->links() !!}
 @endforeach
+
 @else
 <tr>
     <td colspan="10">There are no data.</td>
 </tr>
 @endif
 </tbody>
+{!! $unsur->links() !!}
         </table>
 
 

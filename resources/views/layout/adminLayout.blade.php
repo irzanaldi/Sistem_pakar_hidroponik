@@ -127,7 +127,7 @@
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Kesimpulan</span></a>
             </li>

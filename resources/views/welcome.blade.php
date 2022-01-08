@@ -20,10 +20,6 @@
                 @foreach ($bagians as $bagian)
                 <th>{{ $bagian->nama }}</th>
                 @endforeach
-                {{-- <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th> --}}
               </tr>
             </thead>
             <tbody>
@@ -32,7 +28,7 @@
                 <select class="form-select" aria-label="Default select example">
                     <option selected value="">Pilih Gejala Daun</option>
                     @foreach ($gejalaDaun as $daun)
-                        <option value="{{ $daun->id }}">{{ $daun->nama }}</option>
+                        <option value="{{ $daun->id }}">{{ $daun->name }}</option>
                     @endforeach
                 </select>
                 </td>
@@ -40,7 +36,7 @@
                     <select class="form-select" aria-label="Default select example">
                         <option selected value="">Pilih Gejala Batang</option>
                         @foreach ($gejalaBatang as $batang)
-                            <option value="{{ $batang->id }}">{{ $batang->nama }}</option>
+                            <option value="{{ $batang->id }}">{{ $batang->name }}</option>
                         @endforeach
                     </select>
                     </td>
@@ -48,7 +44,15 @@
                         <select class="form-select" aria-label="Default select example">
                             <option selected value="">Pilih Gejala Akar</option>
                             @foreach ($gejalaAkar as $akar)
-                                <option value="{{ $akar->id }}">{{ $akar->nama }}</option>
+                                <option value="{{ $akar->id }}">{{ $akar->name }}</option>
+                            @endforeach
+                        </select>
+                    </td>
+                    <td>
+                        <select class="form-select" aria-label="Default select example">
+                            <option selected value="">Pilih Gejala Proses Tumbuh</option>
+                            @foreach ($gejalaProses as $proses)
+                                <option value="{{ $proses->id }}">{{ $proses->name }}</option>
                             @endforeach
                         </select>
                     </td>

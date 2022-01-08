@@ -20,6 +20,7 @@ class UnsurController extends Controller
     {
         //
         $unsur = UnsurHara::paginate(5);
+        // dd($unsur);
         return view('admin.unsur', compact('unsur'));
     }
 
@@ -30,9 +31,9 @@ class UnsurController extends Controller
      */
     public function create()
     {
-        //
-        $tanaman = Tanaman::all();
-        return view('FormUnsur', ['tanaman' => $tanaman]);
+        // //
+        // $tanaman = Tanaman::all();
+        // return view('FormUnsur', ['tanaman' => $tanaman]);
     }
 
     /**

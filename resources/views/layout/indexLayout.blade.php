@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/login.css') }}">
     <script s></script>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Sistem Pakar</title>
 </head>
 <body class="text-center ">
     <div class="container d-flex h-100 p-3 mx-auto flex-column">
