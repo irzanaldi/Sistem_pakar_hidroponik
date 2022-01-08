@@ -127,7 +127,7 @@
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="">
+                <a class="nav-link" href="{{ route('kesimpulan.index') }}">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Kesimpulan</span></a>
             </li>

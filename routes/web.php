@@ -6,6 +6,7 @@ use App\Http\Controllers\UnsurController;
 use App\Http\Controllers\GejalaController;
 use App\Http\Controllers\TanamanController;
 use App\Http\Controllers\BagianTumbuhanController;
+use App\Http\Controllers\KesimpulanController;
 use App\Http\Controllers\WelcomeController;
 
 /*
@@ -29,6 +30,7 @@ Route::post('actionlogin', [UserController::class, 'actionlogin'])->name('action
 Route::get('/dassboard', [UserController::class, 'dassboard'])->name('dassboard');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 Route::resource('gejala', GejalaController::class);
+Route::resource('kesimpulan', KesimpulanController::class);
 Route::resource('tanaman', TanamanController::class);
 Route::put('tanaman-update/{id}', [TanamanController::class, 'update'])->name('update');
 Route::resource('unsur', UnsurController::class);

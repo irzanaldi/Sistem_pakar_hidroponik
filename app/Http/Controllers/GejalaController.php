@@ -23,7 +23,7 @@ class GejalaController extends Controller
      */
     public function index()
     {
-        $gejala = Gejala::paginate();
+        $gejala = Gejala::paginate(5);
         $tanaman = Tanaman::get();
         $unsur = UnsurHara::get();
         $bagian = BagianTanaman::get();
@@ -53,7 +53,6 @@ class GejalaController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
         $rules = [
             'nama' => 'required',
             'unsur' => 'required',

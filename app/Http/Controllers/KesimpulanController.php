@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kesimpulan;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class KesimpulanController extends Controller
 {
@@ -13,7 +17,8 @@ class KesimpulanController extends Controller
      */
     public function index()
     {
-        //
+        $kesimpulan = Kesimpulan::paginate(5);
+        return view('admin.kesimpulan', compact('kesimpulan'));
     }
 
     /**
@@ -34,7 +39,32 @@ class KesimpulanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+            'nama' => 'required',
+            'unsur' => 'required',
+        ];
+        $pesan = [
+            'nama.required' => 'nama tidak boleh kosong',
+            'unsur.required' => 'unsur hara tidak boleh kosong'
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $pesan);
+        if ($validator->fails()) {
+            return redirect()->back()->witherror($validator);
+        }
+
+        $kesimpulan = Kesimpulan::create([
+            'unsur_id' => $request->unsur,
+            'name' => $request->nama,
+        ]);
+
+        if ($kesimpulan) {
+            Session::flash('succes', 'data berhasil disimpan');
+            return redirect()->route('kesimpu$kesimpulan.index');
+        } else {
+            Session::flash('error', ['' => 'data gagal disimpan']);
+            return redirect()->route('kesimpu$kesimpulan.index');
+        }
     }
 
     /**
