@@ -9,7 +9,7 @@ class Kesimpulan extends Model
 {
     use HasFactory;
 
-    public $fillable = ['name', 'unsur_id'];
+    public $fillable = ['name', 'unsur_id', 'solusi'];
 
     public function unsur()
     {
