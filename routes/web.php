@@ -36,3 +36,4 @@ Route::put('tanaman-update/{id}', [TanamanController::class, 'update'])->name('u
 Route::resource('unsur', UnsurController::class);
 Route::resource('bagian', BagianTumbuhanController::class);
 Route::delete('tanaman-destroy/{id}', [TanamanController::class, 'delete'])->name('tanaman.destroy');
+Route::post('/cek', [WelcomeController::class, 'cekPakar'])->name('user.cek');

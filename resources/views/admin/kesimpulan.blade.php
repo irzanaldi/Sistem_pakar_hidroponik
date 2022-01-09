@@ -81,7 +81,7 @@
                     <input type="text" class="form-control" value="{{ $value->name }}" id="nama" name="nama" aria-describedby="emailHelp">
 
                     <label for="">Nama Unsur</label>
-                    <select name="unsur" id="unsur" class="form-control">
+                <select name="unsur" id="unsur" class="form-control">
                         <option value="">Pilih Unsur Hara</option>
                         @foreach ($unsur as $gejala)
                         <option value="{{ $gejala->id }}">{{ $gejala->nama }}</option>
