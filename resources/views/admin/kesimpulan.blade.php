@@ -37,7 +37,8 @@
                             <td>
                                 <a href="" class="btn btn-danger" data-toggle="modal" name="_method" value="DELETE"
                                 data-target="#hapustanaman{{  $value->id }}">Delete</a>
-                                <a href="" class="btn btn-warning">Update</a>
+                                <a href="" class="btn btn-warning" data-target="#update-modal{{  $value->id }}"
+                                    data-toggle="modal">Update</a>
                             </td>
                         </tr>
 
@@ -71,25 +72,31 @@
                     </button>
     </div>
         <div class="modal-body">
+            @if(session('errors'))
+            <div class="alert alert-primary">
+                <b>Opps!</b> {{session('errors')}}
+            </div>
+            @endif
                 <!--FORM TAMBAH BARANG-->
-        <form action="{{ route('update', [ $value->id ]) }}" method="post">
+        <form action="{{ route('kesimpulan.update', [ $value->id ]) }}" method="post">
                     @csrf
                     {{-- {{ method_field('PUT') }} --}}
                     @method('put')
                 <div class="form-group">
-                    <label for="">Nama kesimpulan</label>
-                    <input type="text" class="form-control" value="{{ $value->name }}" id="nama" name="nama" aria-describedby="emailHelp">
+                    <label for="">Nama kesimpulan <span class="text-danger">*</span> </label>
+                    <input type="text" class="form-control" value="{{ $value->name }}" id="nama" name="nama" aria-describedby="emailHelp" required>
 
-                    <label for="">Nama Unsur</label>
-                <select name="unsur" id="unsur" class="form-control">
-                        <option value="">Pilih Unsur Hara</option>
+                    <label for="">Nama Unsur <span class="text-danger">*</span></label>
+                <select name="unsur" id="unsur" class="form-control" required>
+                        <option value="{{ $value->unsur_id }}">{{ $value->unsur->nama }}</option>
                         @foreach ($unsur as $gejala)
                         <option value="{{ $gejala->id }}">{{ $gejala->nama }}</option>
                         @endforeach
                 </select>
 
-                <label for="">Solusi</label>
-                    <input type="text" class="form-control" value="{{ $value->solusi }}" id="solusi" name="solusi" aria-describedby="emailHelp">
+
+                <label for="">Solusi <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" value="{{ $value->solusi }}" id="solusi" name="solusi" aria-describedby="emailHelp" required>
 
                 </div>
             <button type="submit" class="btn btn-primary">Simpan Data</button>
@@ -124,23 +131,28 @@
                     </button>
             </div>
     <div class="modal-body">
+        @if(session('errors'))
+            <div class="alert alert-primary">
+                <b>Opps!</b> {{session('errors')}}
+            </div>
+        @endif
                 <!--FORM TAMBAH BARANG-->
         <form action="{{ route('kesimpulan.store') }}" method="post">
         @csrf
         <div class="form-group">
-            <label for="">Nama kesimpulan</label>
-            <input type="text" class="form-control" id="nama" name="nama" aria-describedby="emailHelp">
+            <label for="">Nama kesimpulan <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="nama" name="nama" aria-describedby="emailHelp" required>
 
-                    <label for="">Nama Unsur</label>
-                    <select name="unsur" id="unsur" class="form-control">
+                    <label for="">Nama Unsur <span class="text-danger">*</span></label>
+                    <select name="unsur" id="unsur" class="form-control" required>
                         <option value="">Pilih Unsur Hara</option>
                         @foreach ($unsur as $gejala)
                         <option value="{{ $gejala->id }}">{{ $gejala->nama }}</option>
                         @endforeach
                 </select>
 
-            <label for="">Solusi</label>
-            <input type="text" class="form-control" id="solusi" name="solusi" aria-describedby="emailHelp">
+            <label for="">Solusi <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="solusi" name="solusi" aria-describedby="emailHelp" required>
 
         </div>
             <button type="submit" class="btn btn-primary">Simpan Data</button>

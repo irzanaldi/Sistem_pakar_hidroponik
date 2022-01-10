@@ -61,10 +61,10 @@ class UnsurController extends Controller
         $unsur->nama = $request->nama;
         $save = $unsur->save();
         if ($save) {
-            Session::flash('succes', 'data berhasil disimpan');
+            Session::flash('success', 'data berhasil disimpan');
             return redirect()->route('unsur.index');
         } else {
-            Session::flash('error', ['' => 'register gagal']);
+            Session::flash('errors', ['' => 'register gagal']);
             return redirect()->route('unsur.index');
         }
     }

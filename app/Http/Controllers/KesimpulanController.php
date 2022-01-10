@@ -106,13 +106,32 @@ class KesimpulanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'name' => 'required',
-            'unsur' => 'required'
-        ]);
-        Kesimpulan::find($id)->update($request->all());
-        return redirect()->route('kesimpulan.index')
-            ->with('success', 'Kesimpulan Berhasil Diubah');
+        $rules = [
+            'nama' => 'required',
+            'unsur' => 'required',
+            'solusi' => 'required',
+        ];
+        $pesan = [
+            'nama.required' => 'nama tidak boleh kosong',
+            'unsur.required' => 'unsur hara tidak boleh kosong',
+            'solusi.required' => 'solusi tidak boleh kosong',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $pesan);
+        if ($validator->fails()) {
+            // dd($validator);
+            return redirect()->back()->witherror($validator);
+        }
+
+        $kesimpulan = Kesimpulan::find($id)->update($request->all());
+
+        if ($kesimpulan) {
+            Session::flash('success', 'data berhasil disimpan');
+            return redirect()->route('kesimpulan.index');
+        } else {
+            Session::flash('errors', ['' => 'data gagal disimpan']);
+            return redirect()->route('kesimpulan.index');
+        }
     }
 
     /**

@@ -41,7 +41,8 @@
                             <td>
                                 <a href="" class="btn btn-danger" data-toggle="modal" name="_method" value="DELETE"
                                 data-target="#hapustanaman{{  $value->id_gejala }}">Delete</a>
-                                <a href="" class="btn btn-warning">Update</a>
+                                <a href="" class="btn btn-warning" data-target="#update-modal{{  $value->id }}"
+                                    data-toggle="modal">Update</a>
                             </td>
                         </tr>
 
@@ -60,6 +61,60 @@
             </form>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak Jadi</button>
         </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="update-modal{{ $value->id }}" tabindex="-1" aria-labelledby="modalTambahBarang" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Update Gejala</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+    </div>
+        <div class="modal-body">
+            @if(session('errors'))
+            <div class="alert alert-primary">
+                <b>Opps!</b> {{session('errors')}}
+            </div>
+            @endif
+                <!--FORM TAMBAH BARANG-->
+        <form action="{{ route('gejala.update', [ $value->id ]) }}" method="post">
+                    @csrf
+                    {{-- {{ method_field('PUT') }} --}}
+                    @method('put')
+                    <div class="form-group">
+                        <label for="">Nama Gejala <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="nama" value="{{ $value->name }}" name="nama" aria-describedby="emailHelp" required>
+                        <label for="">Nama Bagian <span class="text-danger">*</span></label>
+                        <select name="bagian" id="bagian" class="form-control" aria-label="Default select example" required>
+                            {{-- <option value="">Bagian Tanaman</option> --}}
+                            <option value="{{ $value->bagian_tanamen_id }}">{{ $value->bagianTanamen->nama }}</option>
+                            @foreach ($bagian as $bag)
+                                <option value="{{ $bag->id }}">{{ $bag->nama }}</option>
+                            @endforeach
+                            </select>
+                        <label for="">Nama Tumbuhan <span class="text-danger">*</span></label>
+                            <select name="tumbuhan" id="tumbuhan" class="form-control" required>
+                                <option value="{{ $value->tanamen_id }}">{{ $value->tanamen->nama }}</option>
+                                @foreach ($tanamen as $tanam)
+                                <option value="{{ $tanam->id }}">{{ $tanam->nama }}</option>
+                                @endforeach
+                            </select>
+                        <label for="">Nama Unsur <span class="text-danger">*</span></label>
+                            <select name="unsur" id="unsur" class="form-control" required>
+                                <option value="{{ $value->unsur_id }}">{{ $value->unsur->nama }}</option>
+                                @foreach ($unsur as $unsurHara)
+                                <option value="{{ $unsurHara->id }}">{{ $unsurHara->nama }}</option>
+                                @endforeach
+                            </select>
+                    </div>
+            <button type="submit" class="btn btn-primary">Simpan Data</button>
+        </form>
+    <!--END FORM TAMBAH BARANG-->
+            </div>
         </div>
     </div>
 </div>
@@ -94,26 +149,26 @@
         <form action="{{ route('gejala.store') }}" method="post">
         @csrf
         <div class="form-group">
-            <label for="">Nama Gejala</label>
-                <input type="text" class="form-control" id="nama" name="nama" aria-describedby="emailHelp">
-            <label for="">Nama Bagian</label>
-            <select name="bagian" id="bagian" class="form-control" aria-label="Default select example">
+            <label for="">Nama Gejala <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="nama" name="nama" aria-describedby="emailHelp" required>
+            <label for="">Nama Bagian <span class="text-danger">*</span></label>
+            <select name="bagian" id="bagian" class="form-control" aria-label="Default select example" required>
                 <option value="">Bagian Tanaman</option>
-                @foreach ($bagians as $gejala)
+                @foreach ($bagian as $gejala)
                     <option value="{{ $gejala->id }}">{{ $gejala->nama }}</option>
                 @endforeach
                 </select>
-            <label for="tumbuhan">Nama Tumbuhan</label>
-                <select name="tumbuhan" id="tumbuhan" class="form-control">
+            <label for="tumbuhan">Nama Tumbuhan <span class="text-danger">*</span></label>
+                <select name="tumbuhan" id="tumbuhan" class="form-control" required>
                     <option value="">Pilih Tumbuhan</option>
                     @foreach ($tanamen as $gejala)
                     <option value="{{ $gejala->id }}">{{ $gejala->nama }}</option>
                     @endforeach
                 </select>
-            <label for="">Nama Unsur</label>
-                <select name="unsur" id="unsur" class="form-control">
+            <label for="">Nama Unsur <span class="text-danger">*</span></label>
+                <select name="unsur" id="unsur" class="form-control" required>
                     <option value="">Pilih Unsur Hara</option>
-                    @foreach ($unsurs as $gejala)
+                    @foreach ($unsur as $gejala)
                     <option value="{{ $gejala->id }}">{{ $gejala->nama }}</option>
                     @endforeach
                 </select>

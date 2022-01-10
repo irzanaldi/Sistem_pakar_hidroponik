@@ -127,9 +127,16 @@
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('kesimpulan.index') }}">
+                <a class="nav-link" href="{{ route('gejala.index') }}">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Kesimpulan</span></a>
+                    <span>Gejala</span></a>
+            </li>
+
+            <!-- Nav Item - Tables -->
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('bagian.index') }}">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Bagian Tumbuhan</span></a>
             </li>
 
             <!-- Nav Item - Charts -->
@@ -141,16 +148,9 @@
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('gejala.index') }}">
+                <a class="nav-link" href="{{ route('kesimpulan.index') }}">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Gejala</span></a>
-            </li>
-
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('bagian.index') }}">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Bagian Tumbuhan</span></a>
+                    <span>Kesimpulan</span></a>
             </li>
 
             <!-- Divider -->

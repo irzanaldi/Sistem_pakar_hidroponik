@@ -30,8 +30,8 @@ class GejalaController extends Controller
         return view('admin.gejala')->with([
             'gejala' => $gejala,
             'tanamen' => $tanaman,
-            'unsurs' => $unsur,
-            'bagians' => $bagian,
+            'unsur' => $unsur,
+            'bagian' => $bagian,
         ]);
     }
 
@@ -121,7 +121,7 @@ class GejalaController extends Controller
     {
         //
         $request->validate([
-            'nama_gejala' => 'required'
+            'nama' => 'required'
         ]);
         Gejala::find($id)->update($request->all());
         return redirect()->route('gejala')

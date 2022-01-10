@@ -75,8 +75,8 @@
                     {{-- {{ method_field('PUT') }} --}}
                     @method('put')
                 <div class="form-group">
-                    <label for="">Nama Tanaman</label>
-                    <input type="text" class="form-control" value="{{ $value->nama }}" id="nama" name="nama" aria-describedby="emailHelp">
+                    <label for="">Nama Bagian Tanaman <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" value="{{ $value->nama }}" id="nama" name="nama" aria-describedby="emailHelp" required>
                 </div>
             <button type="submit" class="btn btn-primary">Simpan Data</button>
         </form>
@@ -115,8 +115,8 @@
         <form action="{{ route('bagian.store') }}" method="post">
         @csrf
         <div class="form-group">
-            <label for="">Nama Bagian Tanaman</label>
-            <input type="text" class="form-control" id="nama" name="nama" aria-describedby="emailHelp">
+            <label for="">Nama Bagian Tanaman <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="nama" name="nama" aria-describedby="emailHelp" required>
         </div>
             <button type="submit" class="btn btn-primary">Simpan Data</button>
         </form>
