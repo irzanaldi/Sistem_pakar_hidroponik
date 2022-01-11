@@ -123,9 +123,19 @@ class GejalaController extends Controller
         $request->validate([
             'nama' => 'required'
         ]);
-        Gejala::find($id)->update($request->all());
-        return redirect()->route('gejala')
-            ->with('success', 'Gejala Berhasil Diubah');
+        $gejala = Gejala::find($id)->update([
+            'bagian_tanamen_id' => $request->bagian,
+            'unsur_id' => $request->unsur,
+            'tanamen_id' => $request->tumbuhan,
+            'name' => $request->nama,
+        ]);
+        if ($gejala) {
+            Session::flash('succes', 'data berhasil disimpan');
+            return redirect()->route('gejala.index');
+        } else {
+            Session::flash('error', ['' => 'data gagal disimpan']);
+            return redirect()->route('gejala.index');
+        }
     }
 
     /**

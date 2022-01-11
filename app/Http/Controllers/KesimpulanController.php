@@ -123,7 +123,11 @@ class KesimpulanController extends Controller
             return redirect()->back()->witherror($validator);
         }
 
-        $kesimpulan = Kesimpulan::find($id)->update($request->all());
+        $kesimpulan = Kesimpulan::find($id)->update([
+            'unsur_id' => $request->unsur,
+            'name' => $request->nama,
+            'solusi' => $request->solusi,
+        ]);
 
         if ($kesimpulan) {
             Session::flash('success', 'data berhasil disimpan');
