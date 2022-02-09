@@ -16,7 +16,6 @@
           <h3 class="masthead-brand">Sistem Pakar</h3>
           <nav class="nav nav-masthead justify-content-center">
             <a class="nav-link active" href="#">Home</a>
-            <a class="nav-link" href="#">Features</a>
             {{-- <a class="nav-link" href="{{ route('FormLogin') }}">Login</a> --}}
           </nav>
         </div>
@@ -28,7 +27,7 @@
       </main>
       <footer class="mastfoot mt-auto">
         <div class="inner">
-          <p>Cover template for <a href="https://getbootstrap.com/">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+          <p></p>
         </div>
       </footer>
     </div>
